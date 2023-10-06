@@ -25,10 +25,10 @@ function showMonth(){
     let monthString = monthNames[currentMonth];
     let firstDay = (firstDayOfMonth.getDay() == 0 ? 7 : firstDayOfMonth.getDay())-1
     document.getElementById("month_name").innerHTML = monthString;
-    let lastDayOfMonth = new Date(`${today.getFullYear() + Math.floor((today.getMonth()+navMonth+1)/12)}-${currentMonth+2}-01`) //first day of next month
+    let lastDayOfMonth = new Date(`${today.getFullYear() + Math.floor((today.getMonth()+navMonth+1)/12)}-${(currentMonth+1)%12 + 1}-01`) //first day of next month
     lastDayOfMonth.setDate(0) //last day of THIS month
-    console.log(lastDayOfMonth.toDateString() ,currentMonth, currentYear)
-    console.log(Math.floor((today.getMonth()+navMonth)/13))
+    console.log(lastDayOfMonth.toDateString(), currentMonth, currentYear)
+    console.log(today.getFullYear() + Math.floor((today.getMonth()+navMonth+1)/12))
     //console.log(firstDay,firstDayOfMonth,lastDayOfMonth.getDate());
     //Monate durchgehen
     for(let i = 0;i<42;i++){
