@@ -1,0 +1,59 @@
+body{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+}
+.wrap_cal{
+    display: flex;
+    flex-wrap: wrap;
+    flex-flow: column;
+    background-color: rgb(58, 58, 56);
+    height:auto ;
+}
+#calendar_table{
+    width: 90%;
+    height:100% ;
+    border-collapse: collapse;
+    float:right; 
+    
+}
+.round_circle{
+    border: 3px black solid;
+    visibility: hidden;
+    border-radius: 45%;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    background-color: rgb(68, 65, 65);
+    color: #fff;
+    vertical-align: text-bottom;
+    font-size: 23px;
+}
+
+th{
+    text-align: center;
+    font-size: 25px;
+  }
+
+th,td {
+    border: 2px solid black;
+    height:80px;
+    width: 10vh;
+    vertical-align: top;
+    margin: 0px;
+    padding: 0px;
+    
+  }
+td:hover{
+    background-color: aquamarine;
+}
+
+.month_name{
+    float:left;
+    width: 10vh;
+    background-color: aquamarine;
+}
+form{
+    /*display: flex;*/
+    flex-flow: row;
+    margin: 5px;
+}

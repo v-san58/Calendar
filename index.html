@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendar</title>
+</head>
+<body>  
+        <table id = "calendar_table">
+            <tr id = "weekdays" class = "week">
+                <th id = "week_head"> Week</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+                <th>Saturday</th>
+                <th>Sunday</th>
+            </tr>
+            <tr class = "week" id = "weekone" >
+                <td id = weeknum1></td>
+                <td id = "1_1"><div class = "round_circle"></div></td>
+                <td id = "1_2"><div class = "round_circle"></div></td>
+                <td id = "1_3"><div class = "round_circle"></div></td>
+                <td id = "1_4"><div class = "round_circle"></div></td>
+                <td id = "1_5"><div class = "round_circle"></div></td>
+                <td id = "1_6"><div class = "round_circle"></div></td>
+                <td id = "1_7" onclick="showInputDialog('1_7')" value = "2013-01-01">
+                     <div class = "round_circle"> 1 </div> 
+                </td>
+            </tr>
+            <tr id = "weektwo" class = "week">
+                <td id = weeknum2></td>
+                <td id = "2_1"><div class = "round_circle"></div></td>
+                <td id = "2_2"><div class = "round_circle"></div></td>
+                <td id = "2_3"><div class = "round_circle"></div></td>
+                <td id = "2_4"><div class = "round_circle"></div></td>
+                <td id = "2_5"><div class = "round_circle"></div></td>
+                <td id = "2_6"><div class = "round_circle"></div></td>
+                <td id = "2_7"><div class = "round_circle"></div></td>
+            </tr>
+            <tr id = "weekthree" class = "week">
+                <td id = weeknum3></td>
+                <td id = "3_1"><div class = "round_circle"></div></td>
+                <td id = "3_2"><div class = "round_circle"></div></td>
+                <td id = "3_3"><div class = "round_circle"></div></td>
+                <td id = "3_4"><div class = "round_circle"></div></td>
+                <td id = "3_5"><div class = "round_circle"></div></td>
+                <td id = "3_6"><div class = "round_circle"></div></td>
+                <td id = "3_7"><div class = "round_circle"></div></td>
+            </tr>
+            <tr id = "weekfour" class = "week">
+                <td id = weeknum4></td>
+                <td id = "4_1"><div class = "round_circle"></div></td>
+                <td id = "4_2"><div class = "round_circle"></div></td>
+                <td id = "4_3"><div class = "round_circle"></div></td>
+                <td id = "4_4"><div class = "round_circle"></div></td>
+                <td id = "4_5"><div class = "round_circle"></div></td>
+                <td id = "4_6"><div class = "round_circle"></div></td>
+                <td id = "4_7"><div class = "round_circle"></div></td>
+            </tr>
+            <tr id = "weekfive" class = "week">
+                <td id = weeknum5></td>
+                <td id = "5_1"><div class = "round_circle"></div></td>
+                <td id = "5_2"><div class = "round_circle"></div></td>
+                <td id = "5_3"><div class = "round_circle"></div></td>
+                <td id = "5_4"><div class = "round_circle"></div></td>
+                <td id = "5_5"><div class = "round_circle"></div></td>
+                <td id = "5_6"><div class = "round_circle"></div></td>
+                <td id = "5_7"><div class = "round_circle"></div></td>
+            </tr>
+            <tr id = "weeksix" class = "week">
+                <td id = weeknum6></td>
+                <td id = "6_1"><div class = "round_circle"></div></td>
+                <td id = "6_2"><div class = "round_circle"></div></td>
+                <td id = "6_3"><div class = "round_circle"></div></td>
+                <td id = "6_4"><div class = "round_circle"></div></td>
+                <td id = "6_5"><div class = "round_circle"></div></td>
+                <td id = "6_6"><div class = "round_circle"></div></td>
+                <td id = "6_7"><div class = "round_circle"></div></td>
+            </tr>
+        </table>
+        <h1 id = "month_name">Month 2023</h1>
+        <div id = wrap_cal>
+            <div id = "navBar">
+                <button onclick="nextMonth()">+</button>
+                <button onclick="actualMonth()">o</button>
+                <button onclick="prevMonth()">-</button>
+            </div>
+        <form>
+            <input id = "date_input" type = "date">
+            <input id = "time_input" type="time">
+            <input id = "event_input"  type="text" placeholder="Event">
+            <input type="submit">
+        </form>
+    </div>
+    
+    <script src = "main.js"></script>
+</body>
+</html>
