@@ -6,7 +6,7 @@ const today = new Date();
 const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August",
 "September", "Oktober", "November","December"];
 let navMonth = 0;
-
+let currentMonth; let currentYear;
 function Day(element,day,month,year){
     this.divElement = element;
     this.day = day;
@@ -18,8 +18,8 @@ function Day(element,day,month,year){
 }
 
 function showMonth(){
-    let currentMonth = (today.getMonth()+navMonth) % 12;
-    let currentYear = today.getFullYear() + Math.floor((today.getMonth()+navMonth)/12)
+    currentMonth = (today.getMonth()+navMonth) % 12;
+    currentYear = today.getFullYear() + Math.floor((today.getMonth()+navMonth)/12)
     let firstDayOfMonth = new Date(`${currentYear}-${currentMonth+1}-01`);
     
     let monthString = monthNames[currentMonth];
@@ -39,18 +39,22 @@ function showMonth(){
         {
             element.style.visibility = "visible";
             element.innerHTML = i-firstDay+1;
-            
+            element.onlick = addDate(i-firstDay+1)
+            if(navMonth == 0 && i-firstDay+1 == today.getDay()){
+                element.parentElement.style.backgroundColor = "#444444";
+                element.style.backgroundColor = "red";
+            }
         }
         else{
             element.style.visibility = "hidden";
-
         }
        
         
     }
+
     
 }
-showMonth()
+
 
 function nextMonth(){
     navMonth++;
@@ -73,13 +77,9 @@ form.addEventListener('submit', e => {
 
 
 
-function addDate(id){
-    let element = document.getElementById(id);
-    let div = document.createElement("div");
-    
-
-    div.innerHTML =  
-    element.appendChild(div);
+function addDate(d){
+    console.log(today.toDateString("mm"))
+    form.children[0].value = new Date(`${currentYear}-${currentMonth+1}-${d}`).toLocaleDateString();
 }
 
 function addEvent(){
@@ -98,4 +98,4 @@ function showInputDialog(id){
     inputDate.value = document.getElementById(id).value
 }
 
-
+showMonth()
