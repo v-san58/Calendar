@@ -24,7 +24,7 @@ function showMonth(){
     
     let monthString = monthNames[currentMonth];
     let firstDay = (firstDayOfMonth.getDay() == 0 ? 7 : firstDayOfMonth.getDay())-1
-    document.getElementById("month_name").innerHTML = monthString;
+    document.getElementById("month_name").innerHTML = monthString +` ${currentYear}`;
     let lastDayOfMonth = new Date(`${today.getFullYear() + Math.floor((today.getMonth()+navMonth+1)/12)}-${(currentMonth+1)%12 + 1}-01`) //first day of next month
     lastDayOfMonth.setDate(0) //last day of THIS month
     console.log(lastDayOfMonth.toDateString(), currentMonth, currentYear)
@@ -38,20 +38,21 @@ function showMonth(){
         if(i<lastDayOfMonth.getDate()+firstDay && i>=firstDay)
         {
             element.style.visibility = "visible";
-            element.innerHTML = i-firstDay+1;
-            element.onlick = addDate(i-firstDay+1)
+            element.innerHTML = i-firstDay+1;   
+            element.parentElement.addEventListener("click", e => {
+                addDate(e.target)
+            })
             if(navMonth == 0 && i-firstDay+1 == today.getDay()){
                 element.parentElement.style.backgroundColor = "#444444";
                 element.style.backgroundColor = "red";
             }
+            
         }
         else{
             element.style.visibility = "hidden";
         }
        
-        
     }
-
     
 }
 
@@ -77,17 +78,21 @@ form.addEventListener('submit', e => {
 
 
 
-function addDate(d){
-    console.log(today.toDateString("mm"))
-    form.children[0].value = new Date(`${currentYear}-${currentMonth+1}-${d}`).toLocaleDateString();
+function addDate(element){
+    let d;
+    if(element.tagName == "DIV"){ d = element.innerHTML}
+    else{ d = element.children[0].innerHTML}
+    if(parseInt(d)<10){
+        d = "0"+ d
+    }
+    console.log(new Date(`${currentYear}-${currentMonth+1}-${d}`).toISOString().split("T")[0])
+    form.children[0].value = `${currentYear}-${currentMonth+1}-${d}`;
 }
 
 function addEvent(){
     let result = ""
     let date = document.getElementById("date_input")
-    for (let child of form.children){
-        console.log(child.value);
-    }
+    for (let child of form.children){result+= child.value+ " "; }
     console.log(result);
     return result;
 }

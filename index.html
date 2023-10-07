@@ -20,7 +20,7 @@
             </tr>
             <tr class = "week" id = "weekone" >
                 <td id = weeknum1></td>
-                <td id = "1_1"><div class = "round_circle"></div></td>
+                <td id = "1_1" onclick="addDate('1_1')"><div class = "round_circle"></div></td>
                 <td id = "1_2"><div class = "round_circle"></div></td>
                 <td id = "1_3"><div class = "round_circle"></div></td>
                 <td id = "1_4"><div class = "round_circle"></div></td>
@@ -84,9 +84,9 @@
         <h1 id = "month_name">Month 2023</h1>
         <div id = wrap_cal>
             <div id = "navBar">
-                <button onclick="nextMonth()">+</button>
-                <button onclick="actualMonth()">o</button>
-                <button onclick="prevMonth()">-</button>
+                <div onclick="prevMonth()">-</div>
+                <div onclick="actualMonth()">o</div>
+                <div onclick="nextMonth()">+</div>
             </div>
         <form>
             <input id = "date_input" type = "date">

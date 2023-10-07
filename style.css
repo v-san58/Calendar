@@ -49,11 +49,31 @@ td:hover{
 
 .month_name{
     float:left;
-    width: 10vh;
-    background-color: aquamarine;
+    min-width: 100px;
 }
 form{
     /*display: flex;*/
     flex-flow: row;
     margin: 5px;
 }
+#navBar{
+    display: flex;
+    justify-content: space-evenly;
+    width: 180px;
+}
+#navBar div{
+    display: flex;
+    background-color: #505050;
+    width: 50px;
+    height: 40px;
+    font-size: 28px;
+    margin: 10px;
+    justify-content: space-evenly;
+    border-radius: 25%;
+    color:white;
+    }
+
+    #navBar div:hover{
+        background-color: #909090;
+        box-shadow: 3px 3px black;
+    }
