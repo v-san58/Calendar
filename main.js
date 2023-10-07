@@ -7,6 +7,7 @@ const monthNames = ["January", "February", "March", "April", "May", "June", "Jul
 "September", "Oktober", "November","December"];
 let navMonth = 0;
 let currentMonth; let currentYear; let currentDay; let firstDay;
+let round_circles = document.getElementsByClassName("round_circle")
 function Day(element,day,month,year){
     this.divElement = element;
     this.day = day;
@@ -24,18 +25,21 @@ function showMonth(){
     
     let monthString = monthNames[currentMonth];
     firstDay = (firstDayOfMonth.getDay() == 0 ? 7 : firstDayOfMonth.getDay())-1
-    document.getElementById("month_name").innerHTML = monthString +` ${currentYear}`;
+    document.getElementById("month_name").innerHTML = `${monthString}<br>${currentYear}`;
+    //todo: bug fix previous year does not display
     let lastDayOfMonth = new Date(`${today.getFullYear() + Math.floor((today.getMonth()+navMonth+1)/12)}-${(currentMonth+1)%12 + 1}-01`) //first day of next month
     lastDayOfMonth.setDate(0) //last day of THIS month
     console.log(lastDayOfMonth.toDateString(), currentMonth, currentYear)
     console.log(today.getFullYear() + Math.floor((today.getMonth()+navMonth+1)/12))
     //console.log(firstDay,firstDayOfMonth,lastDayOfMonth.getDate());
     //Monate durchgehen
+    
     for(let i = 0;i<42;i++){
-        let element = document.getElementsByClassName("round_circle")[i]
-        //new Day(element,i+firstDay, firstDayOfMonth.getMonth(),1999)
+        let element = round_circles[i]
+        
         for(let child of element.parentElement.children){
-            if(child.className != "round_circle") {child.remove()} //delete all events from the previous table
+            if(child.className != "round_circle") {child.remove()}//delete all events from the previous table
+             
         }
         if(i<lastDayOfMonth.getDate()+firstDay && i>=firstDay){
             element.style.visibility = "visible";
@@ -47,10 +51,24 @@ function showMonth(){
                 element.parentElement.style.backgroundColor = "#444444";
                 element.style.backgroundColor = "red";
             }
+            else{
+                element.parentElement.style.backgroundColor = "#dddd";
+                element.style.backgroundColor = "#444444";
+            }
+            //hover effect
+            element.parentElement.addEventListener("mouseover", (e) => {
+                if(e.target.tagName =="TD"){e.target.style.backgroundColor = "#888888";}
+                else{e.target.parentElement.style.backgroundColor = "#888888";}
+            })
+            element.parentElement.addEventListener("mouseout", (e) => {
+                if(e.target.tagName =="TD"){e.target.style.backgroundColor = "#dddddd";}
+                else{e.target.parentElement.style.backgroundColor = "#dddddd";}
+            })
             
         }
         else{
             element.style.visibility = "hidden";
+            
         }
        
     }
@@ -74,7 +92,7 @@ function actualMonth(){
 form.addEventListener('submit', e => {
     e.preventDefault();
     let values = getFormValues();
-    let currentTd = document.getElementsByClassName("round_circle")[currentDay].parentElement
+    let currentTd = round_circles[currentDay].parentElement
     let div = document.createElement("div");
     div.innerHTML = `${values[1]} ${values[2]}`; 
     currentTd.appendChild(div);

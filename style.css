@@ -23,7 +23,7 @@ body{
     width: 30px;
     height: 30px;
     text-align: center;
-    background-color: rgb(68, 65, 65);
+    background-color: #444444;
     color: #fff;
     vertical-align: text-bottom;
     font-size: 23px;
@@ -41,16 +41,17 @@ th,td {
     vertical-align: top;
     margin: 0px;
     padding: 0px;
-    
+    background-color: #dddd;
   }
-td:hover{
-    background-color: aquamarine;
-}
 
-.month_name{
+
+
+#month_name{
     float:left;
-    max-width: 100px;
-    font-size: 32px;
+    max-width: 150px;
+    min-height: 80px;
+    margin-left: 10px;
+    
 }
 form{
     /*display: flex;*/
