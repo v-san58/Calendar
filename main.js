@@ -6,7 +6,7 @@ const today = new Date();
 const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August",
 "September", "Oktober", "November","December"];
 let navMonth = 0;
-let currentMonth; let currentYear;
+let currentMonth; let currentYear; let currentDay; let firstDay;
 function Day(element,day,month,year){
     this.divElement = element;
     this.day = day;
@@ -23,7 +23,7 @@ function showMonth(){
     let firstDayOfMonth = new Date(`${currentYear}-${currentMonth+1}-01`);
     
     let monthString = monthNames[currentMonth];
-    let firstDay = (firstDayOfMonth.getDay() == 0 ? 7 : firstDayOfMonth.getDay())-1
+    firstDay = (firstDayOfMonth.getDay() == 0 ? 7 : firstDayOfMonth.getDay())-1
     document.getElementById("month_name").innerHTML = monthString +` ${currentYear}`;
     let lastDayOfMonth = new Date(`${today.getFullYear() + Math.floor((today.getMonth()+navMonth+1)/12)}-${(currentMonth+1)%12 + 1}-01`) //first day of next month
     lastDayOfMonth.setDate(0) //last day of THIS month
@@ -34,9 +34,10 @@ function showMonth(){
     for(let i = 0;i<42;i++){
         let element = document.getElementsByClassName("round_circle")[i]
         //new Day(element,i+firstDay, firstDayOfMonth.getMonth(),1999)
-        
-        if(i<lastDayOfMonth.getDate()+firstDay && i>=firstDay)
-        {
+        for(let child of element.parentElement.children){
+            if(child.className != "round_circle") {child.remove()} //delete all events from the previous table
+        }
+        if(i<lastDayOfMonth.getDate()+firstDay && i>=firstDay){
             element.style.visibility = "visible";
             element.innerHTML = i-firstDay+1;   
             element.parentElement.addEventListener("click", e => {
@@ -72,8 +73,12 @@ function actualMonth(){
 
 form.addEventListener('submit', e => {
     e.preventDefault();
-    addEvent()
-
+    let values = getFormValues();
+    let currentTd = document.getElementsByClassName("round_circle")[currentDay].parentElement
+    let div = document.createElement("div");
+    div.innerHTML = `${values[1]} ${values[2]}`; 
+    currentTd.appendChild(div);
+    
 })
 
 
@@ -82,17 +87,19 @@ function addDate(element){
     let d;
     if(element.tagName == "DIV"){ d = element.innerHTML}
     else{ d = element.children[0].innerHTML}
+    currentDay = parseInt(d) + firstDay - 1;
+    console.log("my day: ",currentDay)
     if(parseInt(d)<10){
         d = "0"+ d
     }
-    console.log(new Date(`${currentYear}-${currentMonth+1}-${d}`).toISOString().split("T")[0])
+    
     form.children[0].value = `${currentYear}-${currentMonth+1}-${d}`;
 }
-
-function addEvent(){
-    let result = ""
+//todo save the events somewhere
+function getFormValues(){
+    let result = new Array();
     let date = document.getElementById("date_input")
-    for (let child of form.children){result+= child.value+ " "; }
+    for (let child of form.children){result.push(child.value); child.value = ""; }
     console.log(result);
     return result;
 }
