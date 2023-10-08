@@ -19,14 +19,14 @@ function Day(element,day,month,year){
 }
 
 function showMonth(){
-    currentMonth = (today.getMonth()+navMonth) % 12;
-    currentYear = today.getFullYear() + Math.floor((today.getMonth()+navMonth)/12)
+    currentMonth = Math.abs((today.getMonth()+navMonth) % 12);
+    currentYear = Math.abs(today.getFullYear() + Math.floor((today.getMonth()+navMonth)/12))
     let firstDayOfMonth = new Date(`${currentYear}-${currentMonth+1}-01`);
     
     let monthString = monthNames[currentMonth];
     firstDay = (firstDayOfMonth.getDay() == 0 ? 7 : firstDayOfMonth.getDay())-1
     document.getElementById("month_name").innerHTML = `${monthString}<br>${currentYear}`;
-    //todo: bug fix previous year does not display
+    
     let lastDayOfMonth = new Date(`${today.getFullYear() + Math.floor((today.getMonth()+navMonth+1)/12)}-${(currentMonth+1)%12 + 1}-01`) //first day of next month
     lastDayOfMonth.setDate(0) //last day of THIS month
     console.log(lastDayOfMonth.toDateString(), currentMonth, currentYear)
@@ -70,7 +70,7 @@ function showMonth(){
             element.style.visibility = "hidden";
             
         }
-       
+        
     }
     
 }

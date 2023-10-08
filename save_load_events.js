@@ -1,5 +1,5 @@
-function loadEvents(date){
-
+function loadEvents(){
+    return fetch("./events.json")
 }
 
 
