@@ -36,36 +36,32 @@ function showMonth(){
     //Monate durchgehen
     
     for(let i = 0;i<42;i++){
-        let element = round_circles[i]
+        let circle = round_circles[i]
         
-        for(let child of element.parentElement.children){
+        for(let child of circle.parentElement.children){
             if(child.className != "round_circle") {child.remove()}//delete all events from the previous table
              
         }
+        
+        circle.parentElement.addEventListener("mouseover",mouseoverColor)
+        circle.parentElement.addEventListener("mouseout", mouseoutColor)
         if(i<lastDayOfMonth.getDate()+firstDay && i>=firstDay){
-            element.style.visibility = "visible";
-            element.innerHTML = i-firstDay+1;
+            circle.style.visibility = "visible";
+            circle.innerHTML = i-firstDay+1;
             if(firstLoad){
-                element.parentElement.addEventListener("click", e => {addDate(e.target)});}
-            if(navMonth == 0 && i-firstDay+1 == today.getDate()){element.style.backgroundColor = "red";}
+                circle.parentElement.addEventListener("click", e => {addDate(e.target)});}
+            if(navMonth == 0 && i-firstDay+1 == today.getDate()){circle.style.backgroundColor = "red";}
             else{
-                element.parentElement.style.backgroundColor = "#dddd";
-                element.style.backgroundColor = "#444444";
+                circle.parentElement.style.backgroundColor = "#dddddd";
+                circle.style.backgroundColor = "#444444";
             }
             //hover effect
-            element.parentElement.addEventListener("mouseover", (e) => {
-                if(e.target.tagName =="TD"){e.target.style.backgroundColor = "#888888";}
-                else{e.target.parentElement.style.backgroundColor = "#888888";}
-            })
-            element.parentElement.addEventListener("mouseout", (e) => {
-                if(e.target.tagName =="TD"){e.target.style.backgroundColor = "#dddddd";}
-                else{e.target.parentElement.style.backgroundColor = "#dddddd";}
-            })
+            
+            
             
         }
         else{
-            element.style.visibility = "hidden";
-            
+            circle.style.visibility = "hidden";
         }
         
     }
@@ -73,6 +69,15 @@ function showMonth(){
     
 }
 
+function mouseoverColor(e){
+    
+    if(e.target.tagName =="TD" && e.target.children[0].style.visibility == "visible"){e.target.style.backgroundColor = "#888888";}
+    else if(e.target.style.visibility == "visible"){e.target.parentElement.style.backgroundColor = "#888888";}
+}
+function mouseoutColor(e){
+    if(e.target.tagName =="TD"){e.target.style.backgroundColor = "#dddddd";}
+    else{e.target.parentElement.style.backgroundColor = "#dddddd";}
+}
 
 function nextMonth(){
     navMonth++;
@@ -92,7 +97,7 @@ form.addEventListener('submit', e => {
     if(form.children[2].value!='' && form.children[0].value!=''){
         let values = getFormValues();
         let currentTd = round_circles[currentDay].parentElement
-        let div = document.createElement("div");
+        let div = document.createElement("p");
         div.innerHTML = `${values[1]} ${values[2]}`; 
         div.style.backgroundColor = "lightgrey"
         div.style.border = "1px solid black"

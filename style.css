@@ -34,13 +34,17 @@ th,td {
     width: auto;
     vertical-align: top;
     background-color: #dddd;
+    overflow-wrap: break-word;
+    max-width: 10vw;
   }
 
   th{
     text-align: center;
     font-size: 25px;
-    background-color: #cccccc;
+    background-color: #bbbbbb;
     font-style: italic;
+    height: 4vh;
+    padding: 8px;
   }
 
 #month_name{
