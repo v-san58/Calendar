@@ -47,10 +47,7 @@ function showMonth(){
             element.innerHTML = i-firstDay+1;
             if(firstLoad){
                 element.parentElement.addEventListener("click", e => {addDate(e.target)});}
-            if(navMonth == 0 && i-firstDay+1 == today.getDay()){
-                element.parentElement.style.backgroundColor = "#444444";
-                element.style.backgroundColor = "red";
-            }
+            if(navMonth == 0 && i-firstDay+1 == today.getDate()){element.style.backgroundColor = "red";}
             else{
                 element.parentElement.style.backgroundColor = "#dddd";
                 element.style.backgroundColor = "#444444";
@@ -92,11 +89,15 @@ function actualMonth(){
 
 form.addEventListener('submit', e => {
     e.preventDefault();
-    let values = getFormValues();
-    let currentTd = round_circles[currentDay].parentElement
-    let div = document.createElement("div");
-    div.innerHTML = `${values[1]} ${values[2]}`; 
-    currentTd.appendChild(div);
+    if(form.children[2].value!='' && form.children[0].value!=''){
+        let values = getFormValues();
+        let currentTd = round_circles[currentDay].parentElement
+        let div = document.createElement("div");
+        div.innerHTML = `${values[1]} ${values[2]}`; 
+        div.style.backgroundColor = "lightgrey"
+        div.style.border = "1px solid black"
+        currentTd.appendChild(div);
+    }
     
 })
 
@@ -122,7 +123,9 @@ function addDate(element){
 function getFormValues(){
     let result = new Array();
     let date = document.getElementById("date_input")
-    for (let child of form.children){result.push(child.value); child.value = ""; }
+    for (let i = 0; i<3;i++){
+        result.push(form.children[i].value);
+         form.children[i].value = ""; }
     console.log(result);
     return result;
 }

@@ -28,22 +28,20 @@ body{
     font-size: 23px;
 }
 
-th{
-    text-align: center;
-    font-size: 25px;
-  }
-
 th,td {
-    border: 2px solid black;
+    border: 3px solid black;
     height:80px;
-    width: 10vh;
+    width: auto;
     vertical-align: top;
-    margin: 3px;
-    padding: 3px;
     background-color: #dddd;
   }
 
-
+  th{
+    text-align: center;
+    font-size: 25px;
+    background-color: #cccccc;
+    font-style: italic;
+  }
 
 #month_name{
     float:left;
