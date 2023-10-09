@@ -7,6 +7,7 @@ const monthNames = ["January", "February", "March", "April", "May", "June", "Jul
 "September", "Oktober", "November","December"];
 let navMonth = 0;
 let currentMonth; let currentYear; let currentDay; let firstDay;
+let firstLoad = false;
 let round_circles = document.getElementsByClassName("round_circle")
 function Day(element,day,month,year){
     this.divElement = element;
@@ -43,10 +44,9 @@ function showMonth(){
         }
         if(i<lastDayOfMonth.getDate()+firstDay && i>=firstDay){
             element.style.visibility = "visible";
-            element.innerHTML = i-firstDay+1;   
-            element.parentElement.addEventListener("click", e => {
-                addDate(e.target)
-            })
+            element.innerHTML = i-firstDay+1;
+            if(!firstLoad){
+                element.parentElement.addEventListener("click", e => {addDate(e.target)});}
             if(navMonth == 0 && i-firstDay+1 == today.getDay()){
                 element.parentElement.style.backgroundColor = "#444444";
                 element.style.backgroundColor = "red";
@@ -101,8 +101,10 @@ form.addEventListener('submit', e => {
 
 
 
+
 function addDate(element){
     let d;
+    let month_string;
     if(element.tagName == "DIV"){ d = element.innerHTML}
     else{ d = element.children[0].innerHTML}
     currentDay = parseInt(d) + firstDay - 1;
@@ -111,7 +113,9 @@ function addDate(element){
         d = "0"+ d
     }
     
-    form.children[0].value = `${currentYear}-${currentMonth+1}-${d}`;
+    if(currentMonth+1<10){month_string = "0"+(currentMonth+1);}
+    else{month_string = ""+(currentMonth+1);}
+    form.children[0].value = `${currentYear}-${month_string}-${d}`;
 }
 //todo save the events somewhere
 function getFormValues(){

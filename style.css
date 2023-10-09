@@ -4,13 +4,12 @@ body{
 }
 .wrap_cal{
     display: flex;
-    flex-wrap: wrap;
     flex-flow: column;
     background-color: rgb(58, 58, 56);
     height:auto ;
 }
 #calendar_table{
-    width: 90%;
+    width: 80%;
     height:100% ;
     border-collapse: collapse;
     float:right; 
@@ -39,8 +38,8 @@ th,td {
     height:80px;
     width: 10vh;
     vertical-align: top;
-    margin: 0px;
-    padding: 0px;
+    margin: 3px;
+    padding: 3px;
     background-color: #dddd;
   }
 
@@ -48,7 +47,7 @@ th,td {
 
 #month_name{
     float:left;
-    max-width: 150px;
+    width: 150px;
     min-height: 80px;
     margin-left: 10px;
     
