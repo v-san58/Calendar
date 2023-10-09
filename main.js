@@ -7,7 +7,7 @@ const monthNames = ["January", "February", "March", "April", "May", "June", "Jul
 "September", "Oktober", "November","December"];
 let navMonth = 0;
 let currentMonth; let currentYear; let currentDay; let firstDay;
-let firstLoad = false;
+let firstLoad = true;
 let round_circles = document.getElementsByClassName("round_circle")
 function Day(element,day,month,year){
     this.divElement = element;
@@ -45,7 +45,7 @@ function showMonth(){
         if(i<lastDayOfMonth.getDate()+firstDay && i>=firstDay){
             element.style.visibility = "visible";
             element.innerHTML = i-firstDay+1;
-            if(!firstLoad){
+            if(firstLoad){
                 element.parentElement.addEventListener("click", e => {addDate(e.target)});}
             if(navMonth == 0 && i-firstDay+1 == today.getDay()){
                 element.parentElement.style.backgroundColor = "#444444";
@@ -72,6 +72,7 @@ function showMonth(){
         }
         
     }
+    firstLoad = false;
     
 }
 
