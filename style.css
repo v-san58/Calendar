@@ -1,6 +1,5 @@
 body{
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-
 }
 .wrap_cal{
     display: flex;
@@ -9,8 +8,8 @@ body{
     height:auto ;
 }
 #calendar_table{
-    width: 80%;
-    height:100% ;
+    width: 80vw;
+    height:90vh ;
     border-collapse: collapse;
     float:right; 
     
@@ -22,7 +21,6 @@ body{
     width: 30px;
     height: 30px;
     text-align: center;
-    background-color: #444444;
     color: #fff;
     vertical-align: text-bottom;
     font-size: 23px;
@@ -35,25 +33,25 @@ th,td {
     vertical-align: top;
     background-color: #dddd;
     overflow-wrap: break-word;
-    max-width: 10vw;
+    max-width: 8vw;
   }
 
-  th{
+th{
     text-align: center;
     font-size: 25px;
     background-color: #bbbbbb;
     font-style: italic;
     height: 4vh;
     padding: 8px;
-  }
+}
 
 #month_name{
     float:left;
     width: 150px;
     min-height: 80px;
     margin-left: 10px;
-    
 }
+
 form{
     /*display: flex;*/
     flex-flow: row;
@@ -74,9 +72,15 @@ form{
     justify-content: space-evenly;
     border-radius: 25%;
     color:white;
+    
     }
 
-    #navBar div:hover{
-        background-color: #909090;
-        box-shadow: 3px 3px black;
-    }
+#navBar div:hover{
+    background-color: #909090;
+    box-shadow: 3px 3px black;
+}
+
+input{
+    border-radius: 5px;
+    font-size: 16px;
+}

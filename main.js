@@ -19,11 +19,19 @@ function Day(element,day,month,year){
     {console.log("day: "+day)}
 }
 
+let firstWeek = ()=>{
+    let jan1 = new Date(String(currentYear))
+    let firstDayOfMonth = new Date();
+    //firstDayOfMonth.setDate(1);
+    console.log(Math.floor((firstDayOfMonth-jan1)/86400000/7),jan1,firstDayOfMonth)
+    return Math.floor((firstDayOfMonth-jan1)/86400000/7)
+} ;
 function showMonth(){
     currentMonth = Math.abs((today.getMonth()+navMonth) % 12);
     currentYear = Math.abs(today.getFullYear() + Math.floor((today.getMonth()+navMonth)/12))
     let firstDayOfMonth = new Date(`${currentYear}-${currentMonth+1}-01`);
-    
+    let fw = firstWeek(); 
+    console.log(test,fw);
     let monthString = monthNames[currentMonth];
     firstDay = (firstDayOfMonth.getDay() == 0 ? 7 : firstDayOfMonth.getDay())-1
     document.getElementById("month_name").innerHTML = `${monthString}<br>${currentYear}`;
@@ -37,23 +45,23 @@ function showMonth(){
     
     for(let i = 0;i<42;i++){
         let circle = round_circles[i]
-        
-        for(let child of circle.parentElement.children){
+        let div = circle.parentElement; 
+        for(let child of div.children){
             if(child.className != "round_circle") {child.remove()}//delete all events from the previous table
              
         }
         
-        circle.parentElement.addEventListener("mouseover",mouseoverColor)
-        circle.parentElement.addEventListener("mouseout", mouseoutColor)
+        div.addEventListener("mouseover",mouseoverColor)
+        div.addEventListener("mouseout", mouseoutColor)
         if(i<lastDayOfMonth.getDate()+firstDay && i>=firstDay){
             circle.style.visibility = "visible";
             circle.innerHTML = i-firstDay+1;
             if(firstLoad){
-                circle.parentElement.addEventListener("click", e => {addDate(e.target)});}
+                div.addEventListener("click", e => {addDate(e.target)});}
             if(navMonth == 0 && i-firstDay+1 == today.getDate()){circle.style.backgroundColor = "red";}
             else{
-                circle.parentElement.style.backgroundColor = "#dddddd";
-                circle.style.backgroundColor = "#444444";
+                div.style.backgroundColor = "#dddddd";
+                circle.style.backgroundColor = "#666666";
             }
             //hover effect
             
@@ -98,9 +106,11 @@ form.addEventListener('submit', e => {
         let values = getFormValues();
         let currentTd = round_circles[currentDay].parentElement
         let div = document.createElement("p");
-        div.innerHTML = `${values[1]} ${values[2]}`; 
+        div.innerHTML = `${values[1]}:${values[2]}`; 
         div.style.backgroundColor = "lightgrey"
         div.style.border = "1px solid black"
+        let dateTime = values[0] + values[1];
+        saveEvent(dateTime,values[2]);
         currentTd.appendChild(div);
     }
     
@@ -110,9 +120,11 @@ form.addEventListener('submit', e => {
 
 
 function addDate(element){
+    /**Sets the value of the Date-Form to the chosen date.
+    */
     let d;
     let month_string;
-    if(element.tagName == "DIV"){ d = element.innerHTML}
+    if(element.tagName == "DIV"){ d = element.innerHTML;}
     else{ d = element.children[0].innerHTML}
     currentDay = parseInt(d) + firstDay - 1;
     console.log("my day: ",currentDay)
