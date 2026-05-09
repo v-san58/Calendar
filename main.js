@@ -1,8 +1,9 @@
-let nav = 0; //Which month are we on? (From current Month)
+
 let clicked = null; //refrences the clicked day
 let test = "s" ? "Test1" : "testt2";
 const form = document.getElementsByTagName("form")[0]
 const today = new Date();
+console.log(today)
 const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August",
 "September", "Oktober", "November","December"];
 let navMonth = 0;
@@ -16,14 +17,20 @@ function Day(element,day,month,year){
     this.year = year;
     this.divE
     this.divElement.innerHTML = day;
-    {console.log("day: "+day)}
+    
+}
+function Appoinment(values){
+    this.timeSet = (values[1]!="")
+    this.date = !this.timeSet ? new Date(values[0]) : new Date(values[0]+"T"+values[1])
+
+    this.eventName = values[2]
+    
 }
 
 let firstWeek = ()=>{
     let jan1 = new Date(String(currentYear))
     let firstDayOfMonth = new Date();
     //firstDayOfMonth.setDate(1);
-    console.log(Math.floor((firstDayOfMonth-jan1)/86400000/7),jan1,firstDayOfMonth)
     return Math.floor((firstDayOfMonth-jan1)/86400000/7)
 } ;
 function showMonth(){
@@ -31,21 +38,20 @@ function showMonth(){
     currentYear = Math.abs(today.getFullYear() + Math.floor((today.getMonth()+navMonth)/12))
     let firstDayOfMonth = new Date(`${currentYear}-${currentMonth+1}-01`);
     let fw = firstWeek(); 
-    console.log(test,fw);
+    
     let monthString = monthNames[currentMonth];
     firstDay = (firstDayOfMonth.getDay() == 0 ? 7 : firstDayOfMonth.getDay())-1
     document.getElementById("month_name").innerHTML = `${monthString}<br>${currentYear}`;
     
-    let lastDayOfMonth = new Date(`${today.getFullYear() + Math.floor((today.getMonth()+navMonth+1)/12)}-${(currentMonth+1)%12 + 1}-01`) //first day of next month
+    let lastDayOfMonth = new Date(`${today.getFullYear() + Math.floor((today.getMonth()+navMonth+1)/12)}-${(currentMonth+1)%12 + 1}-01`) 
+    
     lastDayOfMonth.setDate(0) //last day of THIS month
-    console.log(lastDayOfMonth.toDateString(), currentMonth, currentYear)
-    console.log(today.getFullYear() + Math.floor((today.getMonth()+navMonth+1)/12))
-    //console.log(firstDay,firstDayOfMonth,lastDayOfMonth.getDate());
     //Monate durchgehen
     
     for(let i = 0;i<42;i++){
         let circle = round_circles[i]
-        let div = circle.parentElement; 
+        let div = circle.parentElement;
+
         for(let child of div.children){
             if(child.className != "round_circle") {child.remove()}//delete all events from the previous table
              
@@ -110,7 +116,10 @@ form.addEventListener('submit', e => {
         div.style.backgroundColor = "lightgrey"
         div.style.border = "1px solid black"
         let dateTime = values[0] + values[1];
-        saveEvent(dateTime,values[2]);
+        
+        app = new Appoinment(values)
+        saveAppointment(app);
+        
         currentTd.appendChild(div);
     }
     
@@ -140,9 +149,11 @@ function addDate(element){
 function getFormValues(){
     let result = new Array();
     let date = document.getElementById("date_input")
-    for (let i = 0; i<3;i++){
+    for (let i = 0; i<3;i++)
+        {
         result.push(form.children[i].value);
-         form.children[i].value = ""; }
+        form.children[i].value = ""; 
+        }
     console.log(result);
     return result;
 }
