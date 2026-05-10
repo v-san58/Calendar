@@ -44,8 +44,10 @@ function saveAppointment(app){
 function loadAppointments(currentMonth,currentYear){
     
     const saved = localStorage.getItem("year_map");
+    
+    
     if(!saved)
-        return getEmptyMonthArray[0]
+        return getEmptyMonthArray()[0]
     const year_map = new Map(JSON.parse(saved));
 
     return year_map.get(currentYear)[currentMonth];
