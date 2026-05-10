@@ -19,19 +19,19 @@
                 <th>Sunday</th>
             </tr>
             <tr class = "week" id = "weekone" >
-                <td id = weeknum1></td>
+                <td id = "weeknum1"></td>
                 <td id = "1_1" onclick="addDate('1_1')"><div class = "round_circle"></div></td>
                 <td id = "1_2"><div class = "round_circle"></div></td>
                 <td id = "1_3"><div class = "round_circle"></div></td>
                 <td id = "1_4"><div class = "round_circle"></div></td>
                 <td id = "1_5"><div class = "round_circle"></div></td>
                 <td id = "1_6"><div class = "round_circle"></div></td>
-                <td id = "1_7" onclick="" value = "2013-01-01">
+                <td id = "1_7" >
                      <div class = "round_circle"> 1 </div> 
                 </td>
             </tr>
             <tr id = "weektwo" class = "week">
-                <td id = weeknum2></td>
+                <td id = "weeknum2"></td>
                 <td id = "2_1"><div class = "round_circle"></div></td>
                 <td id = "2_2"><div class = "round_circle"></div></td>
                 <td id = "2_3"><div class = "round_circle"></div></td>
@@ -41,7 +41,7 @@
                 <td id = "2_7"><div class = "round_circle"></div></td>
             </tr>
             <tr id = "weekthree" class = "week">
-                <td id = weeknum3></td>
+                <td id = "weeknum3"></td>
                 <td id = "3_1"><div class = "round_circle"></div></td>
                 <td id = "3_2"><div class = "round_circle"></div></td>
                 <td id = "3_3"><div class = "round_circle"></div></td>
@@ -51,7 +51,7 @@
                 <td id = "3_7"><div class = "round_circle"></div></td>
             </tr>
             <tr id = "weekfour" class = "week">
-                <td id = weeknum4></td>
+                <td id = "weeknum4"></td>
                 <td id = "4_1"><div class = "round_circle"></div></td>
                 <td id = "4_2"><div class = "round_circle"></div></td>
                 <td id = "4_3"><div class = "round_circle"></div></td>
@@ -61,7 +61,7 @@
                 <td id = "4_7"><div class = "round_circle"></div></td>
             </tr>
             <tr id = "weekfive" class = "week">
-                <td id = weeknum5></td>
+                <td id = "weeknum5"></td>
                 <td id = "5_1"><div class = "round_circle"></div></td>
                 <td id = "5_2"><div class = "round_circle"></div></td>
                 <td id = "5_3"><div class = "round_circle"></div></td>
@@ -71,7 +71,7 @@
                 <td id = "5_7"><div class = "round_circle"></div></td>
             </tr>
             <tr id = "weeksix" class = "week">
-                <td id = weeknum6></td>
+                <td id = "weeknum6"></td>
                 <td id = "6_1"><div class = "round_circle"></div></td>
                 <td id = "6_2"><div class = "round_circle"></div></td>
                 <td id = "6_3"><div class = "round_circle"></div></td>
@@ -82,7 +82,7 @@
             </tr>
         </table>
         <h1 id = "month_name">Month 2023</h1>
-        <div id = wrap_cal>
+        <div id = "wrap_cal">
             <div id = "navBar">
                 <div onclick="prevMonth()">&#8592;</div>
                 <div onclick="actualMonth()">o</div>
@@ -96,7 +96,8 @@
         </form>
     </div>
     
-    <script src = "main.js"></script>
     <script src="save_load_events.js"></script>
+    <script src = "main.js"></script>
+    
 </body>
 </html>

@@ -1,9 +1,5 @@
-function loadAppointments(currentMonth,currentYear){
-    let year_map = localStorage.getItem("year_map")
-    
-    return year_map.get(currentYear)[currentMonth];
-    
-}
+
+const year = (new Date()).getFullYear()
 
 function getEmptyMonthArray(){
     let res = new Array() 
@@ -17,7 +13,7 @@ function getEmptyMonthArray(){
     return res
 }
 
-const year = (new Date()).getFullYear()
+
 
 let year_map = new Map();
 year_map.set(year,getEmptyMonthArray()) 
@@ -29,17 +25,29 @@ function saveAppointment(app){
     const year = app.date.getFullYear();
     const month = app.date.getMonth();
     const day = app.date.getDate();
-    console.log(year_map);
     
+    
+    
+    if(!year_map.has(year)){
+        year_map.set(year, getEmptyMonthArray());
+    }
     let yearArray = year_map.get(year) 
-    yearArray[month][day].push(app)
-    
+    yearArray[month][day-1].push(app)
     //year_map.set(year,yearArray) 
-    console.log(year_map);
+    
 
-    const StringForSaving = JSON.stringify(year_map)
-    localStorage.setItem("year_map",year_map)
+    const StringForSaving = JSON.stringify([...year_map])
+    localStorage.setItem("year_map",StringForSaving)
 }
 
 
+function loadAppointments(currentMonth,currentYear){
+    
+    const saved = localStorage.getItem("year_map");
+    if(!saved)
+        return []
+    const year_map = new Map(JSON.parse(saved));
 
+    return year_map.get(currentYear)[currentMonth];
+    
+}

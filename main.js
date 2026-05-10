@@ -20,9 +20,19 @@ function Day(element,day,month,year){
     
 }
 function Appoinment(values){
-    this.timeSet = (values[1]!="")
-    this.date = !this.timeSet ? new Date(values[0]) : new Date(values[0]+"T"+values[1])
-
+    this.hasTime = (values[1]!="")
+    
+        
+    
+     if(this.hasTime)
+        this.date = new Date(values[0] + "T" + values[1]);
+     else 
+        this.date = new Date(values[0]);
+        
+    console.log(this.date);
+    console.log(this.hasTime);
+    
+    
     this.eventName = values[2]
     
 }
@@ -38,13 +48,15 @@ function showMonth(){
     currentYear = Math.abs(today.getFullYear() + Math.floor((today.getMonth()+navMonth)/12))
     let firstDayOfMonth = new Date(`${currentYear}-${currentMonth+1}-01`);
     let fw = firstWeek(); 
+    let monthAppoinments = loadAppointments(currentMonth,currentYear)
+    console.log(monthAppoinments);
     
     let monthString = monthNames[currentMonth];
     firstDay = (firstDayOfMonth.getDay() == 0 ? 7 : firstDayOfMonth.getDay())-1
     document.getElementById("month_name").innerHTML = `${monthString}<br>${currentYear}`;
     
     let lastDayOfMonth = new Date(`${today.getFullYear() + Math.floor((today.getMonth()+navMonth+1)/12)}-${(currentMonth+1)%12 + 1}-01`) 
-    
+    let appindex
     lastDayOfMonth.setDate(0) //last day of THIS month
     //Monate durchgehen
     
@@ -62,8 +74,26 @@ function showMonth(){
         if(i<lastDayOfMonth.getDate()+firstDay && i>=firstDay){
             circle.style.visibility = "visible";
             circle.innerHTML = i-firstDay+1;
+            appindex = i-firstDay
+            if (appindex>=0){
+                for (const app of monthAppoinments[appindex]){
+                
+                const p = document.createElement("p")
+                date = new Date (app.date)
+                
+                p.innerHTML= Boolean(app.hasTime) ? date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
+                    + "⌚"+ app.eventName :
+                    app.eventName;
+                p.id = "Termin"
+                div.appendChild(p)
+                console.log(appindex);
+                
+                }
+            }
+
             if(firstLoad){
-                div.addEventListener("click", e => {addDate(e.target)});}
+                div.addEventListener("click", e => {addDate(e.target)});
+            }
             if(navMonth == 0 && i-firstDay+1 == today.getDate()){circle.style.backgroundColor = "red";}
             else{
                 div.style.backgroundColor = "#dddddd";
@@ -110,17 +140,9 @@ form.addEventListener('submit', e => {
     e.preventDefault();
     if(form.children[2].value!='' && form.children[0].value!=''){
         let values = getFormValues();
-        let currentTd = round_circles[currentDay].parentElement
-        let div = document.createElement("p");
-        div.innerHTML = `${values[1]}:${values[2]}`; 
-        div.style.backgroundColor = "lightgrey"
-        div.style.border = "1px solid black"
-        let dateTime = values[0] + values[1];
-        
         app = new Appoinment(values)
         saveAppointment(app);
-        
-        currentTd.appendChild(div);
+        showMonth()
     }
     
 })
@@ -136,7 +158,7 @@ function addDate(element){
     if(element.tagName == "DIV"){ d = element.innerHTML;}
     else{ d = element.children[0].innerHTML}
     currentDay = parseInt(d) + firstDay - 1;
-    console.log("my day: ",currentDay)
+    
     if(parseInt(d)<10){
         d = "0"+ d
     }
