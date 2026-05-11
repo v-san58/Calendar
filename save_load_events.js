@@ -13,15 +13,7 @@ function getEmptyMonthArray(){
     return res
 }
 
-
-
-let year_map = new Map();
-year_map.set(year,getEmptyMonthArray()) 
-
-
-
 function saveAppointment(app){
-    
     const year = app.date.getFullYear();
     const month = app.date.getMonth();
     const day = app.date.getDate();
@@ -46,9 +38,14 @@ function loadAppointments(currentMonth,currentYear){
     const saved = localStorage.getItem("year_map");
     
     
-    if(!saved)
-        return getEmptyMonthArray()[0]
-    const year_map = new Map(JSON.parse(saved));
+    if(!saved){
+        const year_map = new Map();
+        year_map.set(currentYear,getEmptyMonthArray()) 
+    }
+    else{
+        const year_map = new Map(JSON.parse(saved));
+    }
+        
 
     return year_map.get(currentYear)[currentMonth];
     
