@@ -49,14 +49,14 @@ function showMonth(){
     let firstDayOfMonth = new Date(`${currentYear}-${currentMonth+1}-01`);
     let fw = firstWeek(); 
     
-    console.log(monthAppoinments);
+    
     
     let monthString = monthNames[currentMonth];
     firstDay = (firstDayOfMonth.getDay() == 0 ? 7 : firstDayOfMonth.getDay())-1
     document.getElementById("month_name").innerHTML = `${monthString}<br>${currentYear}`;
     
     let lastDayOfMonth = new Date(`${today.getFullYear() + Math.floor((today.getMonth()+navMonth+1)/12)}-${(currentMonth+1)%12 + 1}-01`) 
-    let appindex
+    
     lastDayOfMonth.setDate(0) //last day of THIS month
     //Monate durchgehen
     
@@ -126,8 +126,8 @@ form.addEventListener('submit', e => {
     e.preventDefault();
     if(form.children[2].value!='' && form.children[0].value!=''){
         let values = getFormValues();
-        app = new Appoinment(values)
-        saveAppointment(app);
+        
+        
         showMonth()
     }
     
