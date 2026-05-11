@@ -48,7 +48,7 @@ function showMonth(){
     currentYear = Math.abs(today.getFullYear() + Math.floor((today.getMonth()+navMonth)/12))
     let firstDayOfMonth = new Date(`${currentYear}-${currentMonth+1}-01`);
     let fw = firstWeek(); 
-    let monthAppoinments = loadAppointments(currentMonth,currentYear)
+    
     console.log(monthAppoinments);
     
     let monthString = monthNames[currentMonth];
@@ -74,22 +74,8 @@ function showMonth(){
         if(i<lastDayOfMonth.getDate()+firstDay && i>=firstDay){
             circle.style.visibility = "visible";
             circle.innerHTML = i-firstDay+1;
-            appindex = i-firstDay
-            if (appindex>=0){
-                for (const app of monthAppoinments[appindex]){
-                
-                const p = document.createElement("p")
-                date = new Date (app.date)
-                
-                p.innerHTML= Boolean(app.hasTime) ? date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
-                    + "⌚"+ app.eventName :
-                    app.eventName;
-                p.id = "Termin"
-                div.appendChild(p)
-                console.log(appindex);
-                
-                }
-            }
+            
+            
 
             if(firstLoad){
                 div.addEventListener("click", e => {addDate(e.target)});
