@@ -49,7 +49,7 @@ function showMonth(){
     let firstDayOfMonth = new Date(`${currentYear}-${currentMonth+1}-01`);
     let fw = firstWeek(); 
     let monthAppoinments = loadAppointments(currentMonth,currentYear)
-    console.log(monthAppoinments);
+    
     
     let monthString = monthNames[currentMonth];
     firstDay = (firstDayOfMonth.getDay() == 0 ? 7 : firstDayOfMonth.getDay())-1
@@ -76,6 +76,7 @@ function showMonth(){
             circle.innerHTML = i-firstDay+1;
             appindex = i-firstDay
             if (appindex>=0){
+                let id_num = 0
                 for (const app of monthAppoinments[appindex]){
                 
                 const p = document.createElement("p")
@@ -84,9 +85,11 @@ function showMonth(){
                 p.innerHTML= Boolean(app.hasTime) ? date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
                     + "&#x231A;"+ app.eventName :
                     app.eventName;
-                p.id = "Termin"
+                p.id = "Termin_num_"+id_num+"_day_"+appindex
+                
+                createDelButton(p)
                 div.appendChild(p)
-                console.log(appindex);
+                
                 
                 }
             }
@@ -135,6 +138,25 @@ function actualMonth(){
     navMonth = 0;
     showMonth()
 }
+function createDelButton(element){
+    const b = document.createElement("button");
+    b.onclick = (element1) => {
+        console.log(year_map.get(currentYear)[currentMonth]);
+        console.log(element1.target.parentElement.id);
+        //
+        element.remove();
+        
+        
+        //delete from Map
+         removeAppFromLocalStorage(element1)
+
+       
+        
+        
+    }
+    b.textContent = "❌"
+    element.appendChild(b);
+}
 
 form.addEventListener('submit', e => {
     e.preventDefault();
@@ -156,8 +178,11 @@ function addDate(element){
     let d;
     let month_string;
     if(element.tagName == "DIV"){ d = element.innerHTML;}
-    else{ d = element.children[0].innerHTML}
+
+    else if(element.tagName == "TD"){ d = element.children[0].innerHTML}
+    else return;
     currentDay = parseInt(d) + firstDay - 1;
+    
     
     if(parseInt(d)<10){
         d = "0"+ d
@@ -167,7 +192,7 @@ function addDate(element){
     else{month_string = ""+(currentMonth+1);}
     form.children[0].value = `${currentYear}-${month_string}-${d}`;
 }
-//todo save the events somewhere
+/
 function getFormValues(){
     let result = new Array();
     let date = document.getElementById("date_input")

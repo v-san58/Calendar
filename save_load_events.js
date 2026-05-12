@@ -36,6 +36,19 @@ function saveAppointment(app){
 }
 
 
+function saveAppointment(){
+    const StringForSaving = JSON.stringify([...year_map])
+    localStorage.setItem("year_map",StringForSaving)
+}
+
+function removeAppFromLocalStorage(button_element){
+    const app_num = parseInt(button_element.target.parentElement.id.split("_")[2]);
+    const currentDay = parseInt(button_element.target.parentElement.id.split("_")[4])
+        
+    year_map.get(currentYear)[currentMonth][currentDay].splice(app_num, 1); 
+    saveAppointment()
+}
+
 function loadAppointments(currentMonth,currentYear){
     
     const saved = localStorage.getItem("year_map");
