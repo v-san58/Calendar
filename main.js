@@ -1,6 +1,4 @@
 
-let clicked = null; //refrences the clicked day
-let test = "s" ? "Test1" : "testt2";
 const form = document.getElementsByTagName("form")[0]
 const today = new Date();
 console.log(today)
@@ -47,19 +45,20 @@ function showMonth(){
     let lastDayOfMonth = new Date(`${today.getFullYear() + Math.floor((today.getMonth()+navMonth+1)/12)}-${(currentMonth+1)%12 + 1}-01`) 
     
     lastDayOfMonth.setDate(0) //last day of THIS month
-    //Monate durchgehen
+    //Tage vom Monat durchgehen
     let app_num;
     for(let i = 0;i<42;i++){
         let circle = round_circles[i]
         let div = circle.parentElement;
 
         for(let child of div.children){
-            if(child.className != "round_circle") {child.remove()}//delete all events from the previous table
+            if(child.className != "round_circle") child.remove() //delete all events from the previous table
              
         }
         
         div.addEventListener("mouseover",mouseoverColor)
         div.addEventListener("mouseout", mouseoutColor)
+
         if(i<lastDayOfMonth.getDate()+firstDay && i>=firstDay){
             circle.style.visibility = "visible";
             circle.innerHTML = i-firstDay+1;
@@ -88,14 +87,13 @@ function showMonth(){
             if(firstLoad){
                 div.addEventListener("click", e => {addDate(e.target)});
             }
+            //heutigen Tag makieren
             if(navMonth == 0 && i-firstDay+1 == today.getDate()){circle.style.backgroundColor = "red";}
             else{
                 div.style.backgroundColor = "#dddddd";
                 circle.style.backgroundColor = "#666666";
             }
-            //hover effect
-            
-            
+
             
         }
         else{
