@@ -10,44 +10,33 @@ let navMonth = 0;
 let currentMonth; let currentYear; let currentDay; let firstDay;
 let firstLoad = true;
 let round_circles = document.getElementsByClassName("round_circle")
-function Day(element,day,month,year){
-    this.divElement = element;
-    this.day = day;
-    this.month = month;
-    this.year = year;
-    this.divE
-    this.divElement.innerHTML = day;
-    
-}
-function Appoinment(values){
-    this.hasTime = (values[1]!="")
-    
-        
-    
-     if(this.hasTime)
-        this.date = new Date(values[0] + "T" + values[1]);
-     else 
-        this.date = new Date(values[0]);
-        
-    console.log(this.date);
-    console.log(this.hasTime);
-    
-    
-    this.eventName = values[2]
-    
+
+class Appoinment {
+    constructor(values) {
+        this.hasTime = (values[1] != "");
+
+
+
+        if (this.hasTime)
+            this.date = new Date(values[0] + "T" + values[1]);
+
+        else
+            this.date = new Date(values[0]);
+
+        console.log(this.date);
+        console.log(this.hasTime);
+
+
+        this.eventName = values[2];
+
+    }
 }
 
-let firstWeek = ()=>{
-    let jan1 = new Date(String(currentYear))
-    let firstDayOfMonth = new Date();
-    //firstDayOfMonth.setDate(1);
-    return Math.floor((firstDayOfMonth-jan1)/86400000/7)
-} ;
+
 function showMonth(){
     currentMonth = Math.abs((today.getMonth()+navMonth) % 12);
     currentYear = Math.abs(today.getFullYear() + Math.floor((today.getMonth()+navMonth)/12))
     let firstDayOfMonth = new Date(`${currentYear}-${currentMonth+1}-01`);
-    let fw = firstWeek(); 
     let monthAppoinments = loadAppointments(currentMonth,currentYear)
    
     
@@ -147,8 +136,6 @@ function createDelButton(element){
         console.log(element1.target.parentElement.id);
         //
         element.remove();
-        
-        
         //delete from Map
          removeAppFromLocalStorage(element1)
 
