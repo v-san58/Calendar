@@ -32,7 +32,6 @@ th,td {
     width: auto;
     vertical-align: top;
     background-color: #dddd;
-    overflow-wrap: break-word;
     max-width: 8vw;
   }
 
@@ -43,6 +42,8 @@ th{
     font-style: italic;
     height: 4vh;
     padding: 8px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 #month_name{
