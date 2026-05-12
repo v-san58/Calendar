@@ -163,7 +163,6 @@ form.addEventListener('submit', e => {
     if(form.children[2].value!='' && form.children[0].value!=''){
         let values = getFormValues();
         app = new Appoinment(values)
-        
         saveAppointment(app);
         
         
