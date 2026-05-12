@@ -85,6 +85,9 @@ input{
     font-size: 16px;
 }
 
-#Termin{
-    color: blue
+.Termin{
+    color: blue;
+    background-color:white;
+    margin: 2px;
+    
 }
