@@ -1,5 +1,5 @@
 
-const year = (new Date()).getFullYear()
+
 
 function getEmptyMonthArray(){
     let res = new Array() 
@@ -13,7 +13,11 @@ function getEmptyMonthArray(){
     return res
 }
 let year_map;
+
+
 function saveAppointment(app){
+    
+    
     const year = app.date.getFullYear();
     const month = app.date.getMonth();
     const day = app.date.getDate();
@@ -33,10 +37,12 @@ function saveAppointment(app){
 
     const StringForSaving = JSON.stringify([...year_map])
     localStorage.setItem("year_map",StringForSaving)
+    console.log("save");
+    
 }
 
 
-function saveAppointment(){
+saveCurrentMap = ()=> {
     const StringForSaving = JSON.stringify([...year_map])
     localStorage.setItem("year_map",StringForSaving)
 }
@@ -46,7 +52,7 @@ function removeAppFromLocalStorage(button_element){
     const currentDay = parseInt(button_element.target.parentElement.id.split("_")[4])
         
     year_map.get(currentYear)[currentMonth][currentDay].splice(app_num, 1); 
-    saveAppointment()
+    saveCurrentMap()
 }
 
 function loadAppointments(currentMonth,currentYear){

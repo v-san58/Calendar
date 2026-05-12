@@ -86,7 +86,7 @@ function showMonth(){
                     + "&#x231A;"+ app.eventName :
                     app.eventName;
                 p.id = "Termin_num_"+id_num+"_day_"+appindex
-                
+                p.className = "Termin"
                 createDelButton(p)
                 div.appendChild(p)
                 
@@ -163,7 +163,10 @@ form.addEventListener('submit', e => {
     if(form.children[2].value!='' && form.children[0].value!=''){
         let values = getFormValues();
         app = new Appoinment(values)
+        
         saveAppointment(app);
+        
+        
         showMonth()
     }
     
@@ -192,16 +195,16 @@ function addDate(element){
     else{month_string = ""+(currentMonth+1);}
     form.children[0].value = `${currentYear}-${month_string}-${d}`;
 }
-/
+
 function getFormValues(){
     let result = new Array();
     let date = document.getElementById("date_input")
     for (let i = 0; i<3;i++)
         {
         result.push(form.children[i].value);
-        form.children[i].value = ""; 
+        
         }
-    console.log(result);
+    form.children[2].value = ""; 
     return result;
 }
 
