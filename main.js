@@ -82,7 +82,7 @@ function showMonth(){
                 date = new Date (app.date)
                 
                 p.innerHTML= Boolean(app.hasTime) ? date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
-                    + "⌚"+ app.eventName :
+                    + "&#x231A;"+ app.eventName :
                     app.eventName;
                 p.id = "Termin"
                 div.appendChild(p)
