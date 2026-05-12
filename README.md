@@ -1,24 +1,37 @@
 # Calendar
-Das ist eine einfache Kalender-Webapp, die ohne Framework und nur mit HTML, JavaScript und CSS erstellt wurde.
-Das Projekt ist zum Lernen gedacht und in jedem gängigen Webbrowser laufen sollte.
+Das ist eine einfache Kalender-Webapp, die ich ohne Framework ausschließlich mit HTML, CSS und JavaScript entwickelt habe.
+Das Projekt dient als Lernprojekt und läuft in allen gängigen modernen Webbrowsern.
 
 
 ## Live-Demo
 Hier auf den Link klicken: https://v-san58.github.io/Calendar/
 
 
+## Installation
+1. Repository herunterladen oder klonen
+```bash
+git clone https://github.com/v-san58/Calendar.git
+```
+
+2. Die Datei index.html im Browser öffnen
+
 ## Features
-- Anzeigen znd Berechnen der Daten
-- heutigen Tag anzeigen
-- Navigation durch Monate
-- immer wieder zum aktuellen Monat zurückkehren
-- Termine im Kalender per Formular erstellen und anzeigen
-- Termine im localStorage Speichern 
-- Termine im Kalender per "❌"-Button löschen
+- Berechnung und Anzeige von Kalenderdaten
+- Hervorhebung des aktuellen Tages
+- Navigation zwischen Monaten
+- Rückkehr zum aktuellen Monat
+- Erstellen und Anzeigen von Terminen über ein Formular
+- Speicherung von Terminen im `localStorage`
+- Löschen von Terminen per "❌"-Button
+
+## Projektstruktur
+- `index.html` – Grundstruktur
+- `style.css` – Styling
+- `main.js` – Kalenderlogik und Rendering
+- `save_load.js` - Speicherlogik der Termine
 
 ## Lernen
-Kommen wir zur eigentlichen Intention des Produktes, das Lernen.
-In der folgenden Liste sind Konzepte mit denen ich Erfahrungen machen durfte aufgelistet:
+Während der Entwicklung wurden folgende Konzepte praktisch umgesetzt:
 - DOM-Manipulation (Baumstruktur)
   - Elemente auswählen
   - neue Elemente erzeugen und als Kinder bereits existierender Elemente anfügen
@@ -26,5 +39,5 @@ In der folgenden Liste sind Konzepte mit denen ich Erfahrungen machen durfte auf
 - CSS dynamisch verändern
 - OOP in JS
 - Date-Klasse
-- ==Datumslogik== ([#Berechnung der Daten])
+- **Datumslogik** (Berechnung der Daten)
 - Dynamisches Rendering mit `showMonth()` in `main.js`
