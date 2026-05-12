@@ -1,8 +1,9 @@
 # Calendar
 Das ist eine einfache Kalender-Webapp, die ohne Framework und nur mit HTML, JavaScript und CSS erstellt wurde.
-Das Projekt ist zum lernen gedacht und in jedem gängigen Webbrowser laufen sollte.
+Das Projekt ist zum Lernen gedacht und in jedem gängigen Webbrowser laufen sollte.
 
-🚀 Live-Demo
+
+## Live-Demo
 Hier auf den Link klicken: https://v-san58.github.io/Calendar/
 
 
