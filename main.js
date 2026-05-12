@@ -59,7 +59,7 @@ function showMonth(){
     
     lastDayOfMonth.setDate(0) //last day of THIS month
     //Monate durchgehen
-    
+    let app_num;
     for(let i = 0;i<42;i++){
         let circle = round_circles[i]
         let div = circle.parentElement;
@@ -75,7 +75,9 @@ function showMonth(){
             circle.style.visibility = "visible";
             circle.innerHTML = i-firstDay+1;
             appindex = i-firstDay
+
             if (appindex>=0){
+                app_num=0;
                 for (const app of monthAppoinments[appindex]){
                 
                 const p = document.createElement("p")
@@ -84,10 +86,13 @@ function showMonth(){
                 p.innerHTML= Boolean(app.hasTime) ? date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
                     + "⌚"+ app.eventName :
                     app.eventName;
-                p.id = "Termin"
+                p.id="Termin_num_"+app_num+"_day_"+appindex; 
+                p.className= "Termin"; 
+                
+                createDelButton(p);
                 div.appendChild(p)
                 
-                
+                app_num++;
                 }
             }
 

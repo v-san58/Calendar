@@ -49,8 +49,9 @@ saveCurrentMap = ()=> {
 
 function removeAppFromLocalStorage(button_element){
     const app_num = parseInt(button_element.target.parentElement.id.split("_")[2]);
-    const currentDay = parseInt(button_element.target.parentElement.id.split("_")[4])
-        
+    const currentDay = parseInt(button_element.target.parentElement.id.split("_")[4]);
+    console.log(app_num,currentDay);
+    
     year_map.get(currentYear)[currentMonth][currentDay].splice(app_num, 1); 
     saveCurrentMap()
 }
